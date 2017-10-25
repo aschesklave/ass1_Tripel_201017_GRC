@@ -2,7 +2,7 @@
 #include <limits.h>
 #include <float.h>
 #define TRUE 1
-
+// julian
 void sortTriplets(float triangle_triplets[UCHAR_MAX][3], int triangle_quantity)
 {
 	int array_changed = 0;
