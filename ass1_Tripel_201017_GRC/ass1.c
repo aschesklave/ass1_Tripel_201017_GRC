@@ -27,6 +27,39 @@ void sortTriplets(float triangle_triplets[UCHAR_MAX][3], int triangle_quantity)
 	}
 }
 
+void checkTriangle(float triangle_triplets[UCHAR_MAX][3], int triangle_quantity)
+{
+  int a, b, c;
+  for (int count = 0; count < triangle_quantity; count++)
+  {
+    a = triangle_triplets[count][0];
+    b = triangle_triplets[count][1];
+    c = triangle_triplets[count][2];
+    if (a + b > c)
+    {
+      printf("Triplet %d (a=%d, b=%d, c=%d) is a triangle.\n", count + 1, a, b, c);
+    }
+    else
+    {
+      printf("Triplet %d (a=%d, b=%d, c=%d) is NO triangle.\n", count + 1, a, b, c);
+    }
+
+    if (a == b && b == c && a == c)
+    {
+      printf("  It is an equilateral triangle.\n");
+    }
+    else if(a == b)
+    {
+      printf("  It is an isosceles triangle.\n");
+    }
+    else if((a * a) + (b * b) == (c * c))
+    {
+      printf("  It is a right triangle.\n");
+    }
+  }
+}
+
+
 int main(void)
 {
 	int  triangle_quantity = 0;
@@ -69,6 +102,5 @@ int main(void)
 				continue;
 			}
 	}
-	
 	return 0;
 }
