@@ -37,11 +37,11 @@ void checkTriangle(float triangle_triplets[UCHAR_MAX][3], int triangle_quantity)
     c = triangle_triplets[count][2];
     if (a + b > c)
     {
-      printf("Triplet %d (a=%d, b=%d, c=%d) is a triangle.\n", count + 1, a, b, c);
+      printf("Triplet %d (a=%.6f, b=%.6f, c=%.6f) is a triangle.\n", count + 1, a, b, c);
     }
     else
     {
-      printf("Triplet %d (a=%d, b=%d, c=%d) is NO triangle.\n", count + 1, a, b, c);
+      printf("Triplet %d (a=%.6f, b=%.6f, c=%.6f) is NO triangle.\n", count + 1, a, b, c);
 			continue;
     }
 
