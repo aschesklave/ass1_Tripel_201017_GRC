@@ -16,7 +16,7 @@ void sortTriplets(float triangle_triplets[UCHAR_MAX][3], int triangle_quantity)
 			{
 				if (triangle_triplets[i][sort_pos] > triangle_triplets[i][sort_pos + 1])
 				{
-					int tmp = triangle_triplets[i][sort_pos];//swap elements
+					float tmp = triangle_triplets[i][sort_pos];//swap elements
 					triangle_triplets[i][sort_pos] = triangle_triplets[i][sort_pos + 1];
 					triangle_triplets[i][sort_pos + 1] = tmp;
 
@@ -27,48 +27,97 @@ void sortTriplets(float triangle_triplets[UCHAR_MAX][3], int triangle_quantity)
 	}
 }
 
+
+
 int main(void)
 {
+	char input_str[80];
 	int  triangle_quantity = 0;
 	float triangle_triplets[UCHAR_MAX][3];
-	int cnt = 0;
+	int input_error = 0;
+	int point_cnt = 0;
 
 	while(TRUE)
 	{
+		input_error = 0;
 		printf("Please enter the number of triangles to check: ");
-		cnt = scanf("%d", &triangle_quantity);
+		gets(input_str);
+		
+		for (int i = 0;; i++)
+		{
+			if (input_str[i] == '\0')
+			{
+				break;
+			}
+			if (input_str[i] >= 48 && input_str[i] <= 57)
+			{
+				triangle_quantity = triangle_quantity * 10 + input_str[i] - 48;
+				continue;
+			}
+			else
+			{
+				input_error = 1;
+				break;
+			}
+		}
 
-		if (cnt != 1 || triangle_quantity < 1 || triangle_quantity > UCHAR_MAX)
+		if (input_error != 0 || triangle_quantity < 1 || triangle_quantity > UCHAR_MAX)
 		{
 			printf("[ERR] Invalid number of triangles.\n");
 			continue;
 		}
+		//printf("Anzahl: %d", triangle_quantity);
 		break;
 	}
 
 	for (int i = 0; i < triangle_quantity * 3; i++)
 	{
-			switch (i % 3)
+		switch (i % 3)
+		{
+			case 0: printf("Please enter the first number of the triplet: ");
+				break;
+			case 1: printf("Please enter the second number of the triplet: ");
+				break;
+			case 2: printf("Please enter the third number of the triplet: ");
+				break;
+			default: printf("[ERR] Undefined Error.\n");
+				return 1;
+		}
+
+		while (TRUE)
+		{
+			triangle_triplets[i / 3][i % 3] = 0;
+			input_error = 0;
+			gets(input_str);
+
+			for (int j = 0;; j++)
 			{
-				case 0: printf("Please enter the first number of the triplet: ");
+				if (input_str[j] == '\0')
 					break;
-				case 1: printf("Please enter the second number of the triplet: ");
+				if (input_str[j] == '.')
+					if (point_cnt <= 1)
+					{
+						input_error = 1;
+						break;
+					}
+					else
+						point_cnt++;
+
+				if (input_str[j] < 48 || input_str[j] > 58)
+				{
+					input_error = 1;
 					break;
-				case 2: printf("Please enter the third number of the triplet: ");
-					break;
-				default: printf("[ERR] Undefined Error.\n");
-					return 1;
+				}
 			}
+			sscanf(input_str, "%f", &triangle_triplets[i / 3][i % 3]);
 
-			cnt = scanf("%f", &triangle_triplets[i / 3][i % 3]);
-
-			if (cnt != 1 || triangle_triplets[i / 3][i % 3] < 0 || triangle_triplets[i / 3][i % 3] > FLT_MAX)
+			if (input_error != 0 || triangle_quantity < 1 || triangle_quantity > UCHAR_MAX)
 			{
 				printf("[ERR] Invalid number for the triplet.\n");
 				i--;
-				continue;
 			}
+			break;
+		}
 	}
-	
 	return 0;
 }
