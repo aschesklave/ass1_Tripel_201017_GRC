@@ -42,6 +42,7 @@ void checkTriangle(float triangle_triplets[UCHAR_MAX][3], int triangle_quantity)
     else
     {
       printf("Triplet %d (a=%d, b=%d, c=%d) is NO triangle.\n", count + 1, a, b, c);
+			continue;
     }
 
     if (a == b && b == c && a == c)
@@ -102,5 +103,6 @@ int main(void)
 				continue;
 			}
 	}
+
 	return 0;
 }
